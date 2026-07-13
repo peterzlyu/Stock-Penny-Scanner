@@ -5,10 +5,9 @@ app = FastAPI()
 
 @app.get("/")
 def health_check():
-    return {"status": "alive", "message": "API is running. Navigate to /scan to execute."}
+    return {"status": "alive", "message": "API built successfully."}
 
 @app.get("/scan")
-def run_scan(tickers: str = Query(default="AAPL,MSFT,NVDA")):
+def run_scan(tickers: str = Query(default="AAPL,MSFT")):
     ticker_list = [t.strip().upper() for t in tickers.split(",")]
-    results = execute_penny_scan(ticker_list)
-    return {"status": "success", "data": results}
+    return {"status": "success", "data": execute_penny_scan(ticker_list)}
